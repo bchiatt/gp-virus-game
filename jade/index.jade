@@ -3,7 +3,7 @@ html
   head
     meta(charset='utf-8')
     meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
-    title
+    title Virus Game
     link(href='css/style.css', rel='stylesheet')
     link(href='css/ionic.app.css', rel='stylesheet')
     link(href='css/style.css', rel='stylesheet')
@@ -19,7 +19,7 @@ html
             h1.title Virus Game
       .row
         .col
-          button(ng-click='start()') Play!
+          button.button-large(ng-click='start()', style='margin-top: 50px;') Play!
     ion-pane(ng-show='startGame')
       ion-header-bar.bar-stable
         h1.title Virus Game

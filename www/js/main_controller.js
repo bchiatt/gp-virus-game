@@ -6,6 +6,7 @@
     $scope.menu = true;
     $scope.startGame = false;
     $scope.gameOver = false;
+    var game = null;
 
     document.addEventListener('deviceready', function(){
       screen.lockOrientation('portrait');
