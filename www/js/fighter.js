@@ -1,14 +1,35 @@
-angular.module('gp-virus-game', ['ionic'])
+/* exported Fighter*/
 
-.run(function($ionicPlatform){
+var Fighter = (function(){
   'use strict';
 
-  $ionicPlatform.ready(function(){
-    if(window.cordova && window.cordova.plugins.Keyboard){
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  function Fighter(game){
+    this.width = _;
+    this.height = _;
+    this.r = this.width/2;
+    this.x = (window.innerWidth/2 - this.r);
+    this.y = window.innerHeight - this.height;
+  }
+
+  Fighter.prototype.draw = function(game){
+    if(!game.isWon && !game.isLost){
+      game.ctx.drawImage(game.assets.fighter, this.x, this.y, this.width, this.height);
+      checkBoundaries();
     }
-    if(window.StatusBar){
-      StatusBar.styleDefault();
+  };
+
+  Fighter.prototype.update = function(deltaX){
+    this.x += deltaX;
+    this.cX = this.x + (this.width / 2);
+  };
+
+  Fighter.prototype.shoot = function(){};
+
+  function checkBoundaries(game){
+    if(this.x >= game.canvas.width - this.width || this.x <= 0){
+      this.x = this.x;
     }
-  });
-});
+  }
+
+  return Fighter;
+})();
