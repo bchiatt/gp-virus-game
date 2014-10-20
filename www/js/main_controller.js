@@ -3,11 +3,13 @@
 
   angular.module('gp-virus-game')
   .controller('MainCtrl', ['$scope', '$interval', function($scope, $interval){
+    var game = null;
     $scope.menu = true;
     $scope.startGame = false;
     $scope.gameOver = false;
 
     document.addEventListener('deviceready', function(){
+      console.log('ready');
       screen.lockOrientation('portrait');
       game = new Game();
     });
