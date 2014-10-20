@@ -9,7 +9,7 @@
 
     document.addEventListener('deviceready', function(){
       screen.lockOrientation('portrait');
-      //game = new Game();
+      game = new Game();
     });
 
     window.addEventListener('gameover', function(){
