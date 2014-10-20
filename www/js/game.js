@@ -1,14 +1,61 @@
-angular.module('gp-virus-game', ['ionic'])
+/* exported Game */
+/* global Asset, Fighter, Virus */
 
-.run(function($ionicPlatform){
+var Game = (function(){
   'use strict';
 
-  $ionicPlatform.ready(function(){
-    if(window.cordova && window.cordova.plugins.Keyboard){
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  function Game(){
+    var bodyHeight   = window.innerHeight,
+        headerHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
+
+    this.canvas        = document.getElementById('canvas');
+    this.ctx           = this.canvas.getContext('2d');
+    this.canvas.height = bodyHeight - headerHeight;
+    this.canvas.width  = window.innerWidth;
+    this.assets        = Asset.load();
+    this.isWon         = false;
+    this.isLost        = false;
+
+    this.listen();
+  }
+
+  Game.prototype.listen = function(){
+    window.addEventListener('touchstart', function(data){
+      console.log(data);
+      this.fighter.update(data);
+    }.bind(this));
+  };
+
+  Game.prototype.loop = function(timestamp){
+    this.isWon = this.fighter.killsVirus(this.fighter);
+    this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
+
+    this.clear();
+  //  this.virus.draw(this);
+    this.fighter.draw(this);
+  //  this.laser.draw(this);
+
+    if(this.isLost){
+      window.dispatchEvent(new Event('gameover'));
+      this.assets.ray.play();
+    }else if(this.isWon){
+      window.dispatchEvent(new Event('gameover'));
+      navigator.vibrate(3000);
+    }else{
+      window.requestAnimationFrame(this.loop.bind(this));
     }
-    if(window.StatusBar){
-      StatusBar.styleDefault();
-    }
-  });
-});
+  };
+
+  Game.prototype.clear = function(){
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  };
+
+  Game.prototype.start = function(){
+    this.isWon = false;
+    this.isLost  = false;
+    this.fighter = new Fighter(this);
+    this.loop();
+  };
+
+  return Game;
+})();
