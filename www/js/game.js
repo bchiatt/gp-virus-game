@@ -5,6 +5,7 @@ var Game = (function(){
   'use strict';
 
   function Game(){
+    console.log('in the game constructor.');
     var bodyHeight   = window.innerHeight,
         headerHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
 
@@ -20,8 +21,9 @@ var Game = (function(){
   }
 
   Game.prototype.listen = function(){
+    console.log('listening');
     window.addEventListener('touchstart', function(data){
-      console.log(data);
+      console.log(data.touches[0].clientX);
       this.fighter.update(data);
     }.bind(this));
   };
