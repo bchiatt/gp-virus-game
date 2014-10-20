@@ -4,8 +4,8 @@ var Fighter = (function(){
   'use strict';
 
   function Fighter(game){
-    this.width = _;
-    this.height = _;
+    this.width = 30;
+    this.height = 30;
     this.r = this.width/2;
     this.x = (window.innerWidth/2 - this.r);
     this.y = window.innerHeight - this.height;
