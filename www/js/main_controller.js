@@ -1,14 +1,10 @@
-angular.module('gp-virus-game', ['ionic'])
-
-.run(function($ionicPlatform){
+(function(){
   'use strict';
 
-  $ionicPlatform.ready(function(){
-    if(window.cordova && window.cordova.plugins.Keyboard){
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar){
-      StatusBar.styleDefault();
-    }
-  });
-});
+  angular.module('gp-virus-game')
+  .controller('MainCtrl', ['$scope', '$interval', function($scope, $interval){
+    $scope.menu = true;
+    $scope.startGame = false;
+    $scope.gameOver = false;
+  }]);
+})();

@@ -4,13 +4,24 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
     title
+    link(href='css/style.css', rel='stylesheet')
     link(href='css/ionic.app.css', rel='stylesheet')
     link(href='css/style.css', rel='stylesheet')
     script(src='lib/ionic/js/ionic.bundle.js')
     script(src='cordova.js')
     script(src='js/app.js')
-  body(ng-app='gp-virus-game')
-    ion-pane
+    script(src='js/main_controller.js')
+  body(ng-app='gp-virus-game', ng-controller='MainCtrl')
+    .row(ng-show='menu')
+      .col
+        h1 Virus Game
+        button(ng-click='start()') Play!
+    ion-pane(ng-show='startGame')
       ion-header-bar.bar-stable
         h1.title Virus Game
       ion-content
+        canvas
+    .row(ng-show='gameOver')
+      .col
+        h1 Game Over!
+        button(ng-click='start()') Play Again!
