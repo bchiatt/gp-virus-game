@@ -1,14 +1,28 @@
-angular.module('gp-virus-game', ['ionic'])
+/* exported Asset */
+/* global Media */
 
-.run(function($ionicPlatform){
+var Asset = (function(){
   'use strict';
 
-  $ionicPlatform.ready(function(){
-    if(window.cordova && window.cordova.plugins.Keyboard){
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar){
-      StatusBar.styleDefault();
-    }
-  });
-});
+  function Asset(){
+  }
+
+  Asset.load =function(){
+    var asset = {};
+
+    asset.weapon = new Image();
+    asset.weapon.src = 'assets/img/greenLaserRay.png';
+    asset.virus = new Image();
+    asset.virus.src = 'assets/img/influenza.png';
+    asset.gameOver = new Media();
+    asset.gameOver.src = 'assets/audio/dead.wav';
+    asset.killed = new Media();
+    asset.killed.src = 'assets/audio/killed.wav';
+    asset.shooter = new Media();
+    asset.shooter.src = 'assets/audio/shooter.wav';
+
+    return asset;
+  };
+
+  return Asset;
+})();
