@@ -1,7 +1,10 @@
 /* exported Fighter*/
+/*global Laser */
 
 var Fighter = (function(){
   'use strict';
+
+var lasers = [];
 
   function Fighter(game){
     this.width = 30;
@@ -24,7 +27,17 @@ var Fighter = (function(){
     //this.cX = this.x + (this.width / 2);
   };
 
-  Fighter.prototype.shoot = function(){};
+  Fighter.prototype.shoot = function(laser){
+    new Laser();
+
+      for (var i = 0; i < lasers.length; i++) {
+        if (lasers[i][1] > -11) {
+          lasers[i][1] -= 10;
+        } else if (lasers[i][1] < -10) {
+          lasers.splice(i, 1);
+        }
+      }
+  };
 
   Fighter.prototype.checkBoundaries = function(game){
     if(this.x >= game.canvas.width - this.width || this.x <= 0){
