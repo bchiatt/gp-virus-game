@@ -11,6 +11,7 @@
     $scope.gameOver = false;
 
     document.addEventListener('deviceready', function(){
+      console.log('deviceready');
       screen.lockOrientation('portrait');
       game = new Game();
       console.log(game);
