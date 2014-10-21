@@ -17,13 +17,12 @@ var Virus = (function(){
     this.dY       = coordinates[iY];
     this.r        = this.width/2;
     this.isKilled = false;
-    console.log('new virus---------------', this);
+
+    this.replicate();
   }
 
   Virus.create = function(game){
-    console.log('creating virus!');
     var randomX = Math.floor(Math.random() * (window.innerWidth - virusWidth));
-    console.log('game', game);
     game.viruses.push(new Virus(randomX, 2));
   };
 
@@ -35,20 +34,27 @@ var Virus = (function(){
   Virus.prototype.draw = function(game){
     if(!this.isKilled){
       this.checkBoundaries(game);
-      console.log(this.dY, this.dX);
       game.ctx.drawImage(game.assets.virus, (this.x+= this.dX), (this.y+=this.dY), this.width, this.height);
     }
   };
 
   Virus.prototype.checkBoundaries = function(game){
     if(this.x <= 0 || this.x >= (game.canvas.width - this.width)){
-      console.log('y axis', this.dY);
       return this.dX *= -1;
     }else if(this.y <= 0 || this.y >=(game.canvas.height - this.height)){
-      console.log('x axis', this.dX);
       return this.dY *= -1;
     }
   };
+
+  Virus.prototype.replicate = function(){
+    console.log('start timeout');
+    window.setTimeout(double.bind(this), 5000);
+  };
+
+  function double(){
+    console.log('duplicate', this);
+    new Virus(this.x, this.y);
+  }
 
   return Virus;
 })();

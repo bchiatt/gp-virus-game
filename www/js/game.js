@@ -51,16 +51,12 @@ var Game = (function(){
 
   Game.prototype.loop = function(timestamp){
     count++;
-    console.log('count', count);
     //this.isWon = this.fighter.killsVirus(this.fighter);
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
-    console.log(this.viruses);
     if(count > 83){
-      console.log('make a virus, fool');
       count = null;
       Virus.create(this);
     }
-    console.log(this.viruses);
 
     this.clear();
     this.viruses.forEach(Virus.checkVirus.bind(this));
