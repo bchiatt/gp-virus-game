@@ -5,7 +5,6 @@ var Game = (function(){
   'use strict';
 
   function Game(){
-    console.log('in the game constructor.');
     var bodyHeight   = window.innerHeight,
         headerHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
 
@@ -21,16 +20,36 @@ var Game = (function(){
   }
 
   Game.prototype.listen = function(){
-    console.log('listening');
+    var id    = null,
+        touch = null;
     window.addEventListener('touchstart', function(data){
-      console.log(data.touches[0].clientX);
-      this.fighter.update(data);
+      touch++;
+      console.log(touch);
+      console.log(data);
+      var deltaX    = data.touches[0].clientX,
+          direction = this.getDirection(deltaX);
+
+      if(touch < 2){
+        id = setInterval(function(){
+          console.log('loop');
+          this.fighter.update(direction);
+        }.bind(this), 167);
+      }else{
+        touch = null;
+        console.log('bang!');
+      }
     }.bind(this));
+
+    window.addEventListener('touchend', function(data){
+        console.log('stop');
+        touch = null;
+        clearInterval(id);
+    });
   };
 
   Game.prototype.loop = function(timestamp){
-    this.isWon = this.fighter.killsVirus(this.fighter);
-    this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
+    //this.isWon = this.fighter.killsVirus(this.fighter);
+    //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
 
     this.clear();
   //  this.virus.draw(this);
@@ -56,7 +75,16 @@ var Game = (function(){
     this.isWon = false;
     this.isLost  = false;
     this.fighter = new Fighter(this);
+    console.log('fighter -------------->', this.fighter);
     this.loop();
+  };
+
+  Game.prototype.getDirection = function(deltaX){
+    if(deltaX > this.canvas.width / 2){
+        return '+';
+      }else{
+        return '-';
+      }
   };
 
   return Game;

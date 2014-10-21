@@ -10,6 +10,8 @@ var Asset = (function(){
   Asset.load =function(){
     var asset = {};
 
+    asset.fighter = new Image();
+    asset.fighter.src = 'assets/img/hiv.png';
     asset.weapon = new Image();
     asset.weapon.src = 'assets/img/greenLaserRay.png';
     asset.virus = new Image();

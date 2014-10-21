@@ -9,7 +9,6 @@
     $scope.gameOver = false;
 
     document.addEventListener('deviceready', function(){
-      console.log('ready');
       screen.lockOrientation('portrait');
       game = new Game();
       console.log(game);
@@ -36,6 +35,7 @@
     */
 
     $scope.start = function(){
+      game.start();
       $scope.startGame = true;
       $scope.menu = false;
       $scope.gameOver = false;
