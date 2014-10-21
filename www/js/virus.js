@@ -4,7 +4,7 @@ var Virus = (function(){
   var virusWidth  = 40,
       virusHeight = 40;
 
-  function Virus(x, y){
+  function Virus(x, y, game){
     var coordinates = [-3, -2, -1, 0, 1, 2, 3],
         iX          = Math.floor(Math.random() * coordinates.length),
         iY          = Math.floor(Math.random() * coordinates.length);
@@ -18,12 +18,12 @@ var Virus = (function(){
     this.r        = this.width/2;
     this.isKilled = false;
 
-    this.replicate();
+    this.replicate(game);
   }
 
   Virus.create = function(game){
     var randomX = Math.floor(Math.random() * (window.innerWidth - virusWidth));
-    game.viruses.push(new Virus(randomX, 2));
+    game.viruses.push(new Virus(randomX, 2, game));
   };
 
   Virus.checkVirus = function(element, index){
@@ -46,14 +46,14 @@ var Virus = (function(){
     }
   };
 
-  Virus.prototype.replicate = function(){
+  Virus.prototype.replicate = function(game){
     console.log('start timeout');
-    window.setTimeout(double.bind(this), 5000);
+    window.setTimeout(double(this, game), 5000);
   };
 
-  function double(){
-    console.log('duplicate', this);
-    new Virus(this.x, this.y);
+  function double(virus, game){
+    console.log('duplicate', virus);
+    game.viruses.push(new Virus(virus.x, virus.y));
   }
 
   return Virus;
