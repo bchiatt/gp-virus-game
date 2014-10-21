@@ -5,25 +5,28 @@ var Laser = (function(){
 
 
   function Laser(fighter){
+    console.log(fighter, 'Fighter!!!!');
     this.height = 10;
     this.width  = 4;
-    this.x      = fighter.x;
-    this.y      = fighter.y + 5;
+    this.x      = (fighter.cX - this.width / 2) *1;
+    this.y      = (fighter.cY - 10) * 1;
+    this.cX     = this.x + (this.width / 2) ;
+    this.cY     = this.y + (this.height / 2) ;
+    console.log(this, 'Laser!!!!!');
   }
 
-  Laser.prototype.draw = function(game){
-    game.ctx.drawImage(game.asset.weapon, this.x, this.y, this.width, this.height);
+  Laser.checkLaser = function(element, index){
+    element.draw(this);
   };
 
-  // function moveLaser() {
-    // for (var i = 0; i < lasers.length; i++) {
-      // if (lasers[i][1] > -11) {
-        // lasers[i][1] -= 10;
-      // } else if (lasers[i][1] < -10) {
-        // lasers.splice(i, 1);
-      // }
-    // }
-  // }
+  Laser.prototype.draw = function(game){
+    game.ctx.drawImage(game.assets.weapon, this.x, (this.y -= 5), this.width, this.height);
+  };
 
+  Laser.create = function(game){
+    game.fighter.lasers.push(new Laser(game.fighter));
+    console.log(game.fighter.lasers);
+  };
+
+  return Laser;
 })();
-// });

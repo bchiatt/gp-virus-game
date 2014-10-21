@@ -1,9 +1,10 @@
 
 /* exported Game */
-/* global Asset, Fighter*/
+/* global Asset, Virus, Fighter, Laser*/
 
 var Game = (function(){
   'use strict';
+  var count = null;
 
   function Game(){
     var bodyHeight   = window.innerHeight,
@@ -16,6 +17,7 @@ var Game = (function(){
     this.assets        = Asset.load();
     this.isWon         = false;
     this.isLost        = false;
+    this.viruses       = [];
 
     this.listen();
   }
@@ -25,19 +27,20 @@ var Game = (function(){
         touch = null;
     window.addEventListener('touchstart', function(data){
       touch++;
-      console.log(touch);
-      console.log(data);
+    //  console.log(touch);
+    //  console.log(data);
       var deltaX    = data.touches[0].clientX,
           direction = this.getDirection(deltaX);
 
       if(touch < 2){
         id = setInterval(function(){
           console.log('loop');
-          this.fighter.update(direction);
-        }.bind(this), 167);
+          this.fighter.update(direction, this);
+        }.bind(this), 60);
       }else{
         touch = null;
         console.log('bang!');
+        Laser.create(this);
       }
     }.bind(this));
 
@@ -49,13 +52,18 @@ var Game = (function(){
   };
 
   Game.prototype.loop = function(timestamp){
+    count++;
     //this.isWon = this.fighter.killsVirus(this.fighter);
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
+    if(count > 83){
+      count = null;
+      Virus.create(this);
+    }
 
     this.clear();
-  //  this.virus.draw(this);
+    this.viruses.forEach(Virus.checkVirus.bind(this));
     this.fighter.draw(this);
-  //  this.laser.draw(this);
+    this.fighter.lasers.forEach(Laser.checkLaser.bind(this));
 
     if(this.isLost){
       window.dispatchEvent(new Event('gameover'));
@@ -77,6 +85,7 @@ var Game = (function(){
     this.isLost  = false;
     this.fighter = new Fighter(this);
     console.log('fighter -------------->', this.fighter);
+    Virus.create(this);
     this.loop();
   };
 

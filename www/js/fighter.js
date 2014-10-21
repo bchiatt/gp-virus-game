@@ -4,7 +4,7 @@
 var Fighter = (function(){
   'use strict';
 
-var lasers = [];
+
 
   function Fighter(game){
     this.width = 30;
@@ -12,17 +12,27 @@ var lasers = [];
     this.r = this.width/2;
     this.x = (game.canvas.width/2 - this.r);
     this.y = game.canvas.height - this.height;
+    this.cX     = this.x + (this.width / 2);
+    this.cY     = this.y + (this.height / 2);
+    this.lasers = [];
   }
 
   Fighter.prototype.draw = function(game){
     if(!game.isWon && !game.isLost){
       game.ctx.drawImage(game.assets.fighter, this.x, this.y, this.width, this.height);
-      game.fighter.checkBoundaries(game);
     }
   };
 
-  Fighter.prototype.update = function(direction){
-    this.x += (direction + 1) * 5;
+  Fighter.prototype.update = function(direction, game){
+    var edge = this.checkBoundaries(game);
+    if(!edge){
+      this.x += (direction + 1) * 6;
+      this.cX     = this.x + (this.width / 2);
+    }else{
+      this.x -= (direction + 1) * 7;
+      this.cX     = this.x + (this.width / 2);
+
+    }
     console.log(this.x);
     //this.cX = this.x + (this.width / 2);
   };
@@ -30,19 +40,17 @@ var lasers = [];
   Fighter.prototype.shoot = function(laser){
     new Laser();
 
-      for (var i = 0; i < lasers.length; i++) {
-        if (lasers[i][1] > -11) {
-          lasers[i][1] -= 10;
-        } else if (lasers[i][1] < -10) {
-          lasers.splice(i, 1);
+      for (var i = 0; i < this.lasers.length; i++) {
+        if (this.lasers[i][1] > -11) {
+          this.lasers[i][1] -= 10;
+        } else if (this.lasers[i][1] < -10) {
+          this.lasers.splice(i, 1);
         }
       }
   };
 
   Fighter.prototype.checkBoundaries = function(game){
-    if(this.x >= game.canvas.width - this.width || this.x <= 0){
-      this.x = this.x;
-    }
+    return this.x >= game.canvas.width - this.width || this.x <= 0;
   };
 
   return Fighter;
