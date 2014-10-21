@@ -4,6 +4,7 @@
 
 var Game = (function(){
   'use strict';
+  var count = null;
 
   function Game(){
     var bodyHeight   = window.innerHeight,
@@ -16,6 +17,7 @@ var Game = (function(){
     this.assets        = Asset.load();
     this.isWon         = false;
     this.isLost        = false;
+    this.viruses       = [];
 
     this.listen();
   }
@@ -33,8 +35,8 @@ var Game = (function(){
       if(touch < 2){
         id = setInterval(function(){
           console.log('loop');
-          this.fighter.update(direction);
-        }.bind(this), 167);
+          this.fighter.update(direction, this);
+        }.bind(this), 60);
       }else{
         touch = null;
         console.log('bang!');
@@ -49,13 +51,22 @@ var Game = (function(){
   };
 
   Game.prototype.loop = function(timestamp){
+    count++;
+    console.log('count', count);
     //this.isWon = this.fighter.killsVirus(this.fighter);
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
+    console.log(this.viruses);
+    if(count > 83){
+      console.log('make a virus, fool');
+      count = null;
+      Virus.create(this);
+    }
+    console.log(this.viruses);
 
     this.clear();
-  //  this.virus.draw(this);
+    this.viruses.forEach(Virus.checkVirus.bind(this));
     this.fighter.draw(this);
-  //  this.laser.draw(this);
+    // this.laser.draw(this);
 
     if(this.isLost){
       window.dispatchEvent(new Event('gameover'));
@@ -77,6 +88,7 @@ var Game = (function(){
     this.isLost  = false;
     this.fighter = new Fighter(this);
     console.log('fighter -------------->', this.fighter);
+    Virus.create(this);
     this.loop();
   };
 

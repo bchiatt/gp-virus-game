@@ -1,4 +1,5 @@
 /* global Game */
+
 (function(){
   'use strict';
 
@@ -9,11 +10,7 @@
     $scope.startGame = false;
     $scope.gameOver = false;
 
-    document.addEventListener('deviceready', function(){
-      screen.lockOrientation('portrait');
-      game = new Game();
-      console.log(game);
-    });
+    document.addEventListener('deviceready', startUp, false);
 
     window.addEventListener('gameover', function(){
       //cancelTimer();
@@ -41,6 +38,12 @@
       $scope.menu = false;
       $scope.gameOver = false;
     };
+
+    function startUp(){
+      screen.lockOrientation('portrait');
+      game = new Game();
+      console.log(game);
+    }
 
   }]);
 })();

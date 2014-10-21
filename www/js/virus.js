@@ -1,14 +1,54 @@
-angular.module('gp-virus-game', ['ionic'])
-
-.run(function($ionicPlatform){
+/* exported Virus */
+var Virus = (function(){
   'use strict';
+  var virusWidth  = 40,
+      virusHeight = 40;
 
-  $ionicPlatform.ready(function(){
-    if(window.cordova && window.cordova.plugins.Keyboard){
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  function Virus(x, y){
+    var coordinates = [-3, -2, -1, 0, 1, 2, 3],
+        iX          = Math.floor(Math.random() * coordinates.length),
+        iY          = Math.floor(Math.random() * coordinates.length);
+
+    this.width    = virusWidth;
+    this.height   = virusHeight;
+    this.x        = x * 1;
+    this.y        = y * 1;
+    this.dX       = coordinates[iX];
+    this.dY       = coordinates[iY];
+    this.r        = this.width/2;
+    this.isKilled = false;
+    console.log('new virus---------------', this);
+  }
+
+  Virus.create = function(game){
+    console.log('creating virus!');
+    var randomX = Math.floor(Math.random() * (window.innerWidth - virusWidth));
+    console.log('game', game);
+    game.viruses.push(new Virus(randomX, 2));
+  };
+
+  Virus.checkVirus = function(element, index){
+    // this = game
+    element.draw(this);
+  };
+
+  Virus.prototype.draw = function(game){
+    if(!this.isKilled){
+      this.checkBoundaries(game);
+      console.log(this.dY, this.dX);
+      game.ctx.drawImage(game.assets.virus, (this.x+= this.dX), (this.y+=this.dY), this.width, this.height);
     }
-    if(window.StatusBar){
-      StatusBar.styleDefault();
+  };
+
+  Virus.prototype.checkBoundaries = function(game){
+    if(this.x <= 0 || this.x >= (game.canvas.width - this.width)){
+      console.log('y axis', this.dY);
+      return this.dX *= -1;
+    }else if(this.y <= 0 || this.y >=(game.canvas.height - this.height)){
+      console.log('x axis', this.dX);
+      return this.dY *= -1;
     }
-  });
-});
+  };
+
+  return Virus;
+})();

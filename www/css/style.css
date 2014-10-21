@@ -1,5 +1,5 @@
 /* Empty. Add your own CSS if you like */
 #canvas{
-  background-image: url('../img/heart_background.jpg');
+  background-image: url('/assets/img/heart_background.jpg');
   background-size: cover;
 }
