@@ -26,12 +26,24 @@ var Virus = (function(){
     game.viruses.push(new Virus(randomX, 2));
   };
 
-  Virus.checkVirus = function(element, index){
-    this.cX     = this.x + (this.width / 2);
-    this.cY     = this.y + (this.height / 2);
-    var sumSq = Math.pow(this.cX - )
+  Virus.checkVirus = function(virus, index){
+    virus.cX     = virus.x + (this.width / 2);
+    virus.cY     = virus.y + (this.height / 2);
+
+    this.fighter.Lasers.forEach(function(laser, index){
+    var sumSq    = Math.pow(virus.x - laser.cLx, 2) + Math.pow(virus.y - laser.cLy, 2),
+        distance = Math.sqrt(sumSq);
+      if (distance < this.r  * 0.25){
+        return [true, index];
+      }else{
+        return null;
+      }
+    }.bind(virus));
+    game.viruses.splice(index, 1);
     element.draw(this);
   };
+
+
 
   Virus.prototype.draw = function(game){
     if(!this.isKilled){
