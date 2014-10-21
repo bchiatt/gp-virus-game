@@ -1,4 +1,5 @@
 /* global Game */
+
 (function(){
   'use strict';
 
@@ -9,10 +10,8 @@
     $scope.startGame = false;
     $scope.gameOver = false;
 
-    console.log(window);
     document.addEventListener('deviceready', startUp, false);
 
-    console.log(window);
     window.addEventListener('gameover', function(){
       //cancelTimer();
     });
