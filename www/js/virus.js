@@ -5,7 +5,7 @@ var Virus = (function(){
       virusHeight = 40;
 
   function Virus(x, y, game){
-    var coordinates = [-3, -2, -1, 0, 1, 2, 3],
+    var coordinates = [-3, -2, -1, 1, 2, 3],
         iX          = Math.floor(Math.random() * coordinates.length),
         iY          = Math.floor(Math.random() * coordinates.length);
 
@@ -47,14 +47,14 @@ var Virus = (function(){
   };
 
   Virus.prototype.replicate = function(game){
+    var virus = this;
     console.log('start timeout');
-    window.setTimeout(double(this, game), 5000);
-  };
 
-  function double(virus, game){
-    console.log('duplicate', virus);
-    game.viruses.push(new Virus(virus.x, virus.y));
-  }
+    window.setTimeout(function(){
+      console.log('duplicate', virus);
+      game.viruses.push(new Virus(virus.x, virus.y));
+    }, 5000);
+  };
 
   return Virus;
 })();
