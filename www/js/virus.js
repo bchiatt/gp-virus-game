@@ -19,13 +19,14 @@ var Virus = (function(){
 
   Virus.prototype.draw = function(game){
     if(!this.isKilled){
+      this.checkBoundaries();
       game.ctx.drawImage(game.asset.virus, (this.x+= this.dX), (this.y+=this.dY), this.width, this.height);
     }
   };
 
   Virus.prototype.create = function(game){
     var randomX = Math.floor(Math.random() * (window.innerWidth - this.width));
-    game.ctx.drawImage(game.asset.virus, randomX, 0, this.width, this.height);
+    game.viruses.push(new Virus(randomX, 2));
   };
 
   Virus.prototype.checkBoundaries = function(){
@@ -34,6 +35,6 @@ var Virus = (function(){
     }else if(this.y <= 0 || this.y >=(window.innerHeight - this.height)){
       return this.dX *= -1;
     }
-
   };
+
 })();
