@@ -5,7 +5,7 @@ var Virus = (function(){
       virusHeight = 40;
 
   function Virus(x, y){
-    var coordinates = [-3, -2, -1, 0, 1, 2, 3],
+    var coordinates = [-3, -2, -1, 1, 2, 3],
         iX          = Math.floor(Math.random() * coordinates.length),
         iY          = Math.floor(Math.random() * coordinates.length);
 
