@@ -1,5 +1,5 @@
 /* exported Game */
-/* global Asset, Fighter, Virus */
+/* global Asset, Fighter */
 
 var Game = (function(){
   'use strict';
@@ -15,6 +15,7 @@ var Game = (function(){
     this.assets        = Asset.load();
     this.isWon         = false;
     this.isLost        = false;
+    this.viruses       = [];
 
     this.listen();
   }
@@ -32,8 +33,8 @@ var Game = (function(){
       if(touch < 2){
         id = setInterval(function(){
           console.log('loop');
-          this.fighter.update(direction);
-        }.bind(this), 167);
+          this.fighter.update(direction, this);
+        }.bind(this), 60);
       }else{
         touch = null;
         console.log('bang!');
@@ -52,9 +53,9 @@ var Game = (function(){
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
 
     this.clear();
-  //  this.virus.draw(this);
+    //this.virus.draw(this);
     this.fighter.draw(this);
-  //  this.laser.draw(this);
+    // this.laser.draw(this);
 
     if(this.isLost){
       window.dispatchEvent(new Event('gameover'));

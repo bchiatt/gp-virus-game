@@ -14,12 +14,16 @@ var Fighter = (function(){
   Fighter.prototype.draw = function(game){
     if(!game.isWon && !game.isLost){
       game.ctx.drawImage(game.assets.fighter, this.x, this.y, this.width, this.height);
-      game.fighter.checkBoundaries(game);
     }
   };
 
-  Fighter.prototype.update = function(direction){
-    this.x += (direction + 1) * 5;
+  Fighter.prototype.update = function(direction, game){
+    var edge = this.checkBoundaries(game);
+    if(!edge){
+      this.x += (direction + 1) * 6;
+    }else{
+      this.x -= (direction + 1) * 7;
+    }
     console.log(this.x);
     //this.cX = this.x + (this.width / 2);
   };
@@ -27,9 +31,7 @@ var Fighter = (function(){
   Fighter.prototype.shoot = function(){};
 
   Fighter.prototype.checkBoundaries = function(game){
-    if(this.x >= game.canvas.width - this.width || this.x <= 0){
-      this.x = this.x;
-    }
+    return this.x >= game.canvas.width - this.width || this.x <= 0;
   };
 
   return Fighter;
