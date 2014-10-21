@@ -1,5 +1,5 @@
 /* exported Game */
-/* global Asset, Fighter */
+/* global Asset, Fighter, Virus */
 
 var Game = (function(){
   'use strict';

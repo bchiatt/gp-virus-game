@@ -1,4 +1,5 @@
-/* global Game */
+/*global Game*/
+
 (function(){
   'use strict';
 
