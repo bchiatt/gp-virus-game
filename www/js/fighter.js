@@ -1,7 +1,10 @@
 /* exported Fighter*/
+/*global Laser */
 
 var Fighter = (function(){
   'use strict';
+
+var lasers = [];
 
   function Fighter(game){
     this.width = 30;
@@ -14,24 +17,24 @@ var Fighter = (function(){
   Fighter.prototype.draw = function(game){
     if(!game.isWon && !game.isLost){
       game.ctx.drawImage(game.assets.fighter, this.x, this.y, this.width, this.height);
+      game.fighter.checkBoundaries(game);
     }
   };
 
-  Fighter.prototype.update = function(direction, game){
-    var edge = this.checkBoundaries(game);
-    if(!edge){
-      this.x += (direction + 1) * 6;
-    }else{
-      this.x -= (direction + 1) * 7;
-    }
+  Fighter.prototype.update = function(direction){
+    this.x += (direction + 1) * 5;
     console.log(this.x);
     //this.cX = this.x + (this.width / 2);
   };
 
-  Fighter.prototype.shoot = function(){};
+  Fighter.prototype.shoot = function(laser){
+    new Laser();
+  };
 
   Fighter.prototype.checkBoundaries = function(game){
-    return this.x >= game.canvas.width - this.width || this.x <= 0;
+    if(this.x >= game.canvas.width - this.width || this.x <= 0){
+      this.x = this.x;
+    }
   };
 
   return Fighter;
