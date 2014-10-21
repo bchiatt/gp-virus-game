@@ -1,14 +1,32 @@
-angular.module('gp-virus-game', ['ionic'])
+/* exported Laser */
 
-.run(function($ionicPlatform){
+var Laser = (function(){
   'use strict';
 
-  $ionicPlatform.ready(function(){
-    if(window.cordova && window.cordova.plugins.Keyboard){
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar){
-      StatusBar.styleDefault();
-    }
-  });
-});
+
+  function Laser(fighter){
+    console.log(fighter, 'Fighter!!!!');
+    this.height = 10;
+    this.width  = 4;
+    this.x      = (fighter.cX - this.width / 2) *1;
+    this.y      = (fighter.cY - 10) * 1;
+    this.cX     = this.x + (this.width / 2) ;
+    this.cY     = this.y + (this.height / 2) ;
+    console.log(this, 'Laser!!!!!');
+  }
+
+  Laser.checkLaser = function(element, index){
+    element.draw(this);
+  };
+
+  Laser.prototype.draw = function(game){
+    game.ctx.drawImage(game.assets.weapon, this.x, (this.y -= 5), this.width, this.height);
+  };
+
+  Laser.create = function(game){
+    game.fighter.lasers.push(new Laser(game.fighter));
+    console.log(game.fighter.lasers);
+  };
+
+  return Laser;
+})();

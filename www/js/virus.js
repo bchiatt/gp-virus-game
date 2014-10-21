@@ -27,7 +27,9 @@ var Virus = (function(){
   };
 
   Virus.checkVirus = function(element, index){
-    // this = game
+    this.cX     = this.x + (this.width / 2);
+    this.cY     = this.y + (this.height / 2);
+    var sumSq = Math.pow(this.cX - )
     element.draw(this);
   };
 

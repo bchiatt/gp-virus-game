@@ -1,5 +1,6 @@
+
 /* exported Game */
-/* global Asset, Fighter, Virus */
+/* global Asset, Virus, Fighter, Laser*/
 
 var Game = (function(){
   'use strict';
@@ -26,8 +27,8 @@ var Game = (function(){
         touch = null;
     window.addEventListener('touchstart', function(data){
       touch++;
-      console.log(touch);
-      console.log(data);
+    //  console.log(touch);
+    //  console.log(data);
       var deltaX    = data.touches[0].clientX,
           direction = this.getDirection(deltaX);
 
@@ -39,6 +40,7 @@ var Game = (function(){
       }else{
         touch = null;
         console.log('bang!');
+        Laser.create(this);
       }
     }.bind(this));
 
@@ -61,7 +63,7 @@ var Game = (function(){
     this.clear();
     this.viruses.forEach(Virus.checkVirus.bind(this));
     this.fighter.draw(this);
-    // this.laser.draw(this);
+    this.fighter.lasers.forEach(Laser.checkLaser.bind(this));
 
     if(this.isLost){
       window.dispatchEvent(new Event('gameover'));
