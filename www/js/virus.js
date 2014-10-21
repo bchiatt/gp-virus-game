@@ -1,14 +1,6 @@
-angular.module('gp-virus-game', ['ionic'])
-
-.run(function($ionicPlatform){
+/* exported Virus */
+var Virus = (function(){
   'use strict';
-
-  $ionicPlatform.ready(function(){
-    if(window.cordova && window.cordova.plugins.Keyboard){
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar){
-      StatusBar.styleDefault();
-    }
-  });
-});
+  Virus.prototype.create = function(){};
+  Virus.prototype.bounce = function(){};
+})();
