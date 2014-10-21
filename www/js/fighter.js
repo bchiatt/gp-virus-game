@@ -30,13 +30,13 @@ var lasers = [];
   Fighter.prototype.shoot = function(laser){
     new Laser();
 
-      for (var i = 0; i < lasers.length; i++) {
-        if (lasers[i][1] > -11) {
-          lasers[i][1] -= 10;
-        } else if (lasers[i][1] < -10) {
-          lasers.splice(i, 1);
-        }
+    for (var i = 0; i < lasers.length; i++) {
+      if (lasers[i][1] > -11) {
+        lasers[i][1] -= 10;
+      } else if (lasers[i][1] < -10) {
+        lasers.splice(i, 1);
       }
+    }
   };
 
   Fighter.prototype.checkBoundaries = function(game){

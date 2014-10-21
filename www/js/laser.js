@@ -11,7 +11,7 @@ var Laser = (function(){
     this.y      = fighter.y + 5;
   }
 
-  Laser.prototype.draw = function(game){
+  Laser.prototype.draw = function(fighter){
     game.ctx.drawImage(game.asset.weapon, this.x, this.y, this.width, this.height);
   };
 
