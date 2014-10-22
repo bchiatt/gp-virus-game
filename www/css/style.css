@@ -14,3 +14,8 @@ body{
   background-size: cover;
   /*background-repeat: no-repeat;*/
 }
+
+button{
+  margin-top: 40px;
+  margin-left: 15px;
+}

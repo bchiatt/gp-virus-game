@@ -31,7 +31,9 @@ html
         h1.title Virus Game
       ion-content
         canvas#canvas
+
     .row(ng-show='gameOver')
-      .col
-        h1 Game Over!
-        button(ng-click='start()') Play Again!
+      .row
+        .col
+          h1 Game Over!
+          button(ng-click='start()') Play Again!

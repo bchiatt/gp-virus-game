@@ -12,11 +12,11 @@ var Laser = (function(){
     this.y      = (fighter.cY - 10) * 1;
     //this.cLx     = this.x + (this.width / 2) ;
     //this.cLy     = this.y + (this.height / 2) ;
-    console.log(this, 'Laser!!!!!');
   }
 
   Laser.checkLaser = function(laser, index){
     laser.isOut = laser.didVanish();
+    console.log(laser.isOut);
     if (laser.isOut === true){
       this.fighter.lasers.splice(index, 1);
     }else{
@@ -30,7 +30,6 @@ var Laser = (function(){
 
   Laser.create = function(game){
     game.fighter.lasers.push(new Laser(game.fighter));
-    console.log(game.fighter.lasers);
   };
 
   Laser.prototype.didVanish = function(game){
