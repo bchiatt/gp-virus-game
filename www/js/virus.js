@@ -18,12 +18,7 @@ var Virus = (function(){
     this.r        = this.width;
     this.isKilled = false;
 
-<<<<<<< HEAD
-    this.replicate();
-
-=======
     this.replicate(game);
->>>>>>> 3322fbdbba020e0fa6c298bc6aa73004a10bddd6
   }
 
   Virus.create = function(game){
