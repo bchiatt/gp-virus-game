@@ -37,22 +37,19 @@ var Virus = (function(){
           distance = Math.sqrt(sumSq);
 
       if (distance < this.r * 0.75){
-        console.log('hit!');
         laser.isOut = true;
         this.isKilled = true;
       }
 
-      console.log(laser);
       //game.viruses.splice(index, 1);
     }.bind(virus));
 
     if(virus.isKilled === true){
       this.assets.killed.play();
-      window.dispatchEvent(new Event('dead'));
-      console.log('dead virus', virus);
+      this.kills++;
+      //window.dispatchEvent(new Event('dead'));
       clearTimeout(virus.timer);
       this.viruses.splice(index, 1);
-      console.log('I am hit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     }else{
       virus.draw(this);
     }

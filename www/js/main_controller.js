@@ -9,14 +9,8 @@
     $scope.menu = true;
     $scope.startGame = false;
     $scope.gameOver = false;
-    $scope.kills = 0;
 
     document.addEventListener('deviceready', startUp, false);
-
-    window.addEventListener('dead', function(){
-      $scope.kills++;
-      $scope.$apply();
-    });
 
     window.addEventListener('gameover', function(){
       console.log('game over');
