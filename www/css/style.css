@@ -3,3 +3,8 @@
   background-image: url('../assets/img/heart_background.jpg');
   background-size: cover;
 }
+
+button{
+  margin-top: 40px;
+  margin-left: 15px;
+}
