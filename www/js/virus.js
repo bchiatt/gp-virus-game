@@ -18,7 +18,7 @@ var Virus = (function(){
     this.r        = this.width;
     this.isKilled = false;
 
-    //this.replicate(game);
+    this.replicate(game);
   }
 
   Virus.create = function(game){
@@ -31,11 +31,13 @@ var Virus = (function(){
     virus.cY     = virus.y + (virus.height / 2);
 
     this.fighter.lasers.forEach(function(laser, index){
-      var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY + laser.y, 2),
+      var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY - laser.y, 2),
           distance = Math.sqrt(sumSq);
 
-      console.log(distance);
-      console.log(this.r);
+      console.log('virus', this.cX, this.cY);
+      console.log('laser', laser.x + 2, laser.y);
+      console.log('distance', distance);
+      console.log('radius', this.r);
 
       if (distance < this.r){
         console.log('hit!');
