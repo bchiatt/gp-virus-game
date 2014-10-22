@@ -30,18 +30,27 @@ var Virus = (function(){
     virus.cX     = virus.x + (virus.width / 2);
     virus.cY     = virus.y + (virus.height / 2);
 
+    this.isLost = virus.checkCollision(this);
+
     this.fighter.lasers.forEach(function(laser, index){
       var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY - laser.y, 2),
           distance = Math.sqrt(sumSq);
 
-      if (distance < this.r){
+      if (distance < this.r * 0.75){
         console.log('hit!');
-        virus.isKilled = true;
+        laser.isOut = true;
+        this.isKilled = true;
       }
+
+      console.log(laser);
       //game.viruses.splice(index, 1);
     }.bind(virus));
 
     if(virus.isKilled === true){
+      this.assets.killed.play();
+      window.dispatchEvent(new Event('dead'));
+      console.log('dead virus', virus);
+      clearTimeout(virus.timer);
       this.viruses.splice(index, 1);
       console.log('I am hit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     }else{
@@ -66,12 +75,18 @@ var Virus = (function(){
     }
   };
 
+  Virus.prototype.checkCollision = function(game){
+    var sumSq    = Math.pow(this.cX - (game.fighter.x + 2), 2) + Math.pow(this.cY - game.fighter.y, 2),
+        distance = Math.sqrt(sumSq);
+
+    return distance < this.r * 0.75;
+  };
+
   Virus.prototype.replicate = function(game){
-    window.setTimeout(function(){
+    this.timer = setTimeout(function(){
       game.viruses.push(new Virus(this.x, this.y, game));
       this.replicate(game);
     }.bind(this), 5000, game);
-
   };
 
 

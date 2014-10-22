@@ -16,6 +16,7 @@ var Laser = (function(){
 
   Laser.checkLaser = function(laser, index){
     laser.isOut = laser.didVanish();
+    console.log(laser.isOut);
     if (laser.isOut === true){
       this.fighter.lasers.splice(index, 1);
     }else{

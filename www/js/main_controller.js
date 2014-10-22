@@ -9,13 +9,20 @@
     $scope.menu = true;
     $scope.startGame = false;
     $scope.gameOver = false;
+    $scope.kills = 0;
 
     document.addEventListener('deviceready', startUp, false);
+
+    window.addEventListener('dead', function(){
+      $scope.kills++;
+      $scope.$apply();
+    });
 
     window.addEventListener('gameover', function(){
       console.log('game over');
       $scope.startGame = false;
       $scope.gameOver = true;
+      $scope.$apply();
     });
     /*
     function startClock(){
@@ -40,6 +47,7 @@
       $scope.startGame = true;
       $scope.menu = false;
       $scope.gameOver = false;
+      game.assets.theme.play();
     };
 
     function startUp(){
