@@ -34,11 +34,8 @@ var Game = (function(){
         }.bind(this), 60);
       }else{
         touch = null;
-<<<<<<< HEAD
         console.log('bang!');
         Laser.create(this);
-=======
->>>>>>> b35bcaef2f5a63402b872d74170ec64fbed678f5
         this.assets.shooter.play();
         if(this.fighter.lasers.length < 4){
           this.assets.shooter.play();
