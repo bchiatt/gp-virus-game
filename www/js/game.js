@@ -39,6 +39,7 @@ var Game = (function(){
         }.bind(this), 60);
       }else{
         touch = null;
+        this.assets.shooter.play();
         console.log('bang!');
         Laser.create(this);
       }

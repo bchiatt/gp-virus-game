@@ -42,6 +42,7 @@
     function startUp(){
       screen.lockOrientation('portrait');
       game = new Game();
+      game.assets.theme.play();
       console.log(game);
     }
 
