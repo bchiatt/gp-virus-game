@@ -55,24 +55,18 @@ var Game = (function(){
     count++;
     //this.isWon = this.fighter.killsVirus(this.fighter);
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
-    /*if(count > 83){
+    if(count > 83){
       count = null;
       Virus.create(this);
-    }*/
+    }
 
     this.clear();
     this.viruses.forEach(Virus.checkVirus.bind(this));
     this.fighter.draw(this);
     this.fighter.lasers.forEach(Laser.checkLaser.bind(this));
 
-    if(this.isLost){
+    if(this.viruses.length > 40){
       window.dispatchEvent(new Event('gameover'));
-      this.assets.ray.play();
-    }else if(this.isWon){
-      window.dispatchEvent(new Event('gameover'));
-      navigator.vibrate(3000);
-    }else{
-      window.requestAnimationFrame(this.loop.bind(this));
     }
   };
 
