@@ -10,8 +10,8 @@ var Laser = (function(){
     this.width  = 4;
     this.x      = (fighter.cX - this.width / 2) *1;
     this.y      = (fighter.cY - 10) * 1;
-    this.cX     = this.x + (this.width / 2) ;
-    this.cY     = this.y + (this.height / 2) ;
+    this.cLx     = this.x + (this.width / 2) ;
+    this.cLy     = this.y + (this.height / 2) ;
     console.log(this, 'Laser!!!!!');
   }
 

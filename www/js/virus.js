@@ -15,10 +15,10 @@ var Virus = (function(){
     this.y        = y * 1;
     this.dX       = coordinates[iX];
     this.dY       = coordinates[iY];
-    this.r        = this.width/2;
+    this.r        = this.width;
     this.isKilled = false;
 
-    this.replicate(game);
+    //this.replicate(game);
   }
 
   Virus.create = function(game){
@@ -26,10 +26,33 @@ var Virus = (function(){
     game.viruses.push(new Virus(randomX, 2, game));
   };
 
-  Virus.checkVirus = function(element, index){
-    // this = game
-    element.draw(this);
+  Virus.checkVirus = function(virus, index){
+    virus.cX     = virus.x + (virus.width / 2);
+    virus.cY     = virus.y + (virus.height / 2);
+
+    this.fighter.lasers.forEach(function(laser, index){
+      var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY + laser.y, 2),
+          distance = Math.sqrt(sumSq);
+
+      console.log(distance);
+      console.log(this.r);
+
+      if (distance < this.r){
+        console.log('hit!');
+        virus.isKilled = true;
+      }
+      //game.viruses.splice(index, 1);
+    }.bind(virus));
+
+    if(virus.isKilled === true){
+      this.viruses.splice(index, 1);
+      console.log('I am hit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    }else{
+      virus.draw(this);
+    }
   };
+
+
 
   Virus.prototype.draw = function(game){
     if(!this.isKilled){
@@ -47,13 +70,11 @@ var Virus = (function(){
   };
 
   Virus.prototype.replicate = function(game){
-    var virus = this;
     console.log('start timeout');
-
     window.setTimeout(function(){
-      console.log('duplicate', virus);
-      game.viruses.push(new Virus(virus.x, virus.y));
-    }, 5000);
+      game.viruses.push(new Virus(this.x, this.y, game));
+      this.replicate(game);
+    }.bind(this), 5000, game);
   };
 
   return Virus;
