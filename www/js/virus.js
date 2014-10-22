@@ -70,24 +70,14 @@ var Virus = (function(){
     }
   };
 
-<<<<<<< HEAD
-  Virus.prototype.replicate = function(){
-    console.log('start timeout');
-    window.setTimeout(double.bind(this), 5000);
-=======
   Virus.prototype.replicate = function(game){
     console.log('start timeout');
     window.setTimeout(function(){
       game.viruses.push(new Virus(this.x, this.y, game));
       this.replicate(game);
     }.bind(this), 5000, game);
->>>>>>> 058e9f43cf2f841d347faa832d889ccd05da3f25
   };
 
-  function double(){
-    console.log('duplicate', this);
-    new Virus(this.x, this.y);
-  }
 
   return Virus;
 })();
