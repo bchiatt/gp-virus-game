@@ -15,18 +15,29 @@ var Laser = (function(){
     console.log(this, 'Laser!!!!!');
   }
 
-  Laser.checkLaser = function(element, index){
-    element.draw(this);
+  Laser.checkLaser = function(laser, index){
+    laser.isOut = laser.didVanish();
+    if (laser.isOut === true){
+      this.fighter.lasers.splice(index,1);
+    }else{
+      laser.draw(this);
+    }
+    console.log(this.fighter.lasers);
   };
 
   Laser.prototype.draw = function(game){
-    game.ctx.drawImage(game.assets.weapon, this.x, (this.y -= 5), this.width, this.height);
+    game.ctx.drawImage(game.assets.weapon, this.x, (this.y -= 17), this.width, this.height);
   };
 
   Laser.create = function(game){
     game.fighter.lasers.push(new Laser(game.fighter));
     console.log(game.fighter.lasers);
   };
+
+   Laser.prototype.didVanish = function(game){
+     return this.y - this.height < 0;
+  };
+
 
   return Laser;
 })();
