@@ -13,6 +13,10 @@
     document.addEventListener('deviceready', startUp, false);
 
     window.addEventListener('gameover', function(){
+
+      console.log('game over');
+      game = null;
+      $scope.menu = true;
       $scope.startGame = false;
       $scope.gameOver = true;
 
@@ -31,8 +35,9 @@
     }
     function cancelTimer(){
       $interval.cancel(timer);
-    }
-    */
+    }*/
+
+
 
     $scope.start = function(){
       game.start();
@@ -44,6 +49,7 @@
     function startUp(){
       screen.lockOrientation('portrait');
       game = new Game();
+      game.assets.theme.play();
       console.log(game);
     }
 

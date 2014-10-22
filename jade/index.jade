@@ -20,16 +20,18 @@ html
     .greeting(ng-show='menu')
       .row
         .col
-          ion-header-bar.bar-stable(style='margin-bottom: 20px;')
+          ion-header-bar.bar-assertive(style='margin-bottom: 20px;')
             h1.title Virus Game
       .row
         .col
-          button.button-large(ng-click='start()', style='margin-top: 50px;') Play!
+          button.button.button-block.button-balanced(ng-click='start()', style='margin-top: 50px;') Play!
+
     ion-pane(ng-show='startGame')
       ion-header-bar.bar-stable
         h1.title Virus Game
       ion-content
         canvas#canvas
+
     .row(ng-show='gameOver')
       .col
         h1 Game Over!

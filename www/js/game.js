@@ -32,20 +32,18 @@ var Game = (function(){
 
       if(touch < 2){
         id = setInterval(function(){
-          console.log('loop');
           this.fighter.update(direction, this);
         }.bind(this), 60);
       }else{
         touch = null;
-        console.log('bang!');
-        if (this.fighter.lasers.length < 4){
+        this.assets.shooter.play();
+        if(this.fighter.lasers.length < 4){
           Laser.create(this);
         }
       }
     }.bind(this));
 
     window.addEventListener('touchend', function(data){
-        console.log('stop');
         touch = null;
         clearInterval(id);
     });
@@ -61,12 +59,26 @@ var Game = (function(){
     }
 
     this.clear();
+    this.ctx.font = '20px Sans-Serif';
+    console.log(this.ctx.font, 'FOOONNT... font.');
+    this.ctx.fillStyle = 'white';
+
     this.viruses.forEach(Virus.checkVirus.bind(this));
     this.fighter.draw(this);
     this.fighter.lasers.forEach(Laser.checkLaser.bind(this));
+    this.ctx.fillText('kill Count:'+ count, 5, 20);
 
-    if(this.viruses.length > 40){
+
+    this.isLost = this.viruses.length > 40;
+
+    if(this.isLost){
       window.dispatchEvent(new Event('gameover'));
+      //this.assets.ray.play();
+    }else if(this.isWon){
+      window.dispatchEvent(new Event('gameover'));
+      //navigator.vibrate(3000);
+    }else{
+      window.requestAnimationFrame(this.loop.bind(this));
     }
   };
 
@@ -79,7 +91,6 @@ var Game = (function(){
     this.isWon = false;
     this.isLost  = false;
     this.fighter = new Fighter(this);
-    console.log('fighter -------------->', this.fighter);
     Virus.create(this);
     this.loop();
   };
