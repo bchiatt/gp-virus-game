@@ -40,6 +40,9 @@ var Game = (function(){
         console.log('bang!');
         Laser.create(this);
         this.assets.shooter.play();
+        if(this.fighter.lasers.length < 4){
+          Laser.create(this);
+        }
       }
     }.bind(this));
 
