@@ -22,6 +22,8 @@ var Asset = (function(){
     asset.killed.src = 'assets/audio/killed.wav';
     asset.shooter = new Media();
     asset.shooter.src = 'assets/audio/shooter.wav';
+    asset.theme = new Media();
+    asset.theme.src = 'assets/audio/VirusInvaders.mp3';
 
     return asset;
   };

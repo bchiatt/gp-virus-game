@@ -4,8 +4,8 @@ var Virus = (function(){
   var virusWidth  = 40,
       virusHeight = 40;
 
-  function Virus(x, y, game){
-    var coordinates = [-3, -2, -1, 1, 2, 3],
+  function Virus(x, y){
+    var coordinates = [-3, -2, -1, 0, 1, 2, 3],
         iX          = Math.floor(Math.random() * coordinates.length),
         iY          = Math.floor(Math.random() * coordinates.length);
 
@@ -23,7 +23,7 @@ var Virus = (function(){
 
   Virus.create = function(game){
     var randomX = Math.floor(Math.random() * (window.innerWidth - virusWidth));
-    game.viruses.push(new Virus(randomX, 2, game));
+    game.viruses.push(new Virus(randomX, 2));
   };
 
   Virus.checkVirus = function(virus, index){
@@ -78,6 +78,7 @@ var Virus = (function(){
       this.replicate(game);
     }.bind(this), 5000, game);
   };
+
 
   return Virus;
 })();
