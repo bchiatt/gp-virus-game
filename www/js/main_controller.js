@@ -23,6 +23,7 @@
       $scope.startGame = false;
       $scope.gameOver = true;
       $scope.$apply();
+      game = new Game();
     });
     /*
     function startClock(){

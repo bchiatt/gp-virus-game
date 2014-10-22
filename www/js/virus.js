@@ -89,6 +89,10 @@ var Virus = (function(){
     }.bind(this), 5000, game);
   };
 
+  /*function double(){
+    console.log('duplicate', this);
+    new Virus(this.x, this.y);
+  }*/
 
   return Virus;
 })();
