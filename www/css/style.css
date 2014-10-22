@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
 #canvas{
-  background-image: url('/assets/img/heart_background.jpg');
+  background-image: url('../assets/img/heart_background.jpg');
   background-size: cover;
   /*-webkit-filter: blur(5px);*/
   /*-moz-filter: blur(5px);*/
@@ -10,7 +10,7 @@
 }
 
 body{
-  background-image: url('/assets/img/plx.gif');
+  background-image: url('../assets/img/plx.gif');
   background-size: cover;
   /*background-repeat: no-repeat;*/
 }
