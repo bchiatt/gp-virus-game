@@ -23,8 +23,9 @@ html
           ion-header-bar.bar-assertive(style='margin-bottom: 20px;')
             h1.title Virus Game
       .row
-        .col#body
-          button(ng-click='start()') Play!
+        .col
+          button.button.button-block.button-balanced(ng-click='start()', style='margin-top: 50px;') Play!
+
     ion-pane(ng-show='startGame')
       ion-header-bar.bar-stable
         h1.title Virus Game

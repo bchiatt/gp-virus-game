@@ -3,8 +3,8 @@
 
 var Fighter = (function(){
   'use strict';
-  var fighterHeight = 30,
-      fighterWidth = 55;
+  var fighterHeight = 20,
+      fighterWidth = 60;
 
   function Fighter(game){
     this.width = fighterWidth;

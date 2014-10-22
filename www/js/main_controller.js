@@ -29,8 +29,9 @@
     }
     function cancelTimer(){
       $interval.cancel(timer);
-    }
-    */
+    }*/
+
+
 
     $scope.start = function(){
       game.start();

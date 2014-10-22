@@ -4,7 +4,7 @@ var Virus = (function(){
   var virusWidth  = 40,
       virusHeight = 40;
 
-  function Virus(x, y){
+  function Virus(x, y, game){
     var coordinates = [-3, -2, -1, 0, 1, 2, 3],
         iX          = Math.floor(Math.random() * coordinates.length),
         iY          = Math.floor(Math.random() * coordinates.length);
@@ -18,13 +18,12 @@ var Virus = (function(){
     this.r        = this.width;
     this.isKilled = false;
 
-    this.replicate();
-
+    this.replicate(game);
   }
 
   Virus.create = function(game){
     var randomX = Math.floor(Math.random() * (window.innerWidth - virusWidth));
-    game.viruses.push(new Virus(randomX, 2));
+    game.viruses.push(new Virus(randomX, 2, game));
   };
 
   Virus.checkVirus = function(virus, index){
@@ -32,11 +31,13 @@ var Virus = (function(){
     virus.cY     = virus.y + (virus.height / 2);
 
     this.fighter.lasers.forEach(function(laser, index){
-      var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY + laser.y, 2),
+      var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY - laser.y, 2),
           distance = Math.sqrt(sumSq);
 
-      console.log(distance);
-      console.log(this.r);
+      console.log('virus', this.cX, this.cY);
+      console.log('laser', laser.x + 2, laser.y);
+      console.log('distance', distance);
+      console.log('radius', this.r);
 
       if (distance < this.r){
         console.log('hit!');
@@ -76,6 +77,7 @@ var Virus = (function(){
       game.viruses.push(new Virus(this.x, this.y, game));
       this.replicate(game);
     }.bind(this), 5000, game);
+
   };
 
   /*function double(){
