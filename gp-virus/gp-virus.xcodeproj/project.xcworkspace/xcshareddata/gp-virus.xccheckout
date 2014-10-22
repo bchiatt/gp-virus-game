@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>338C721E-209B-458B-94A2-2C5DBDE6E65C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>gp-virus</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>170E32E859663A9212E8175A14ADE436E9449180</key>
+		<string>https://github.com/bchiatt/gp-virus-game</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>gp-virus/gp-virus.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>170E32E859663A9212E8175A14ADE436E9449180</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bchiatt/gp-virus-game</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>170E32E859663A9212E8175A14ADE436E9449180</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>170E32E859663A9212E8175A14ADE436E9449180</string>
+			<key>IDESourceControlWCCName</key>
+			<string>gp-virus-game</string>
+		</dict>
+	</array>
+</dict>
+</plist>

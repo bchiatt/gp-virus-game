@@ -15,10 +15,11 @@ var Virus = (function(){
     this.y        = y * 1;
     this.dX       = coordinates[iX];
     this.dY       = coordinates[iY];
-    this.r        = this.width/2;
+    this.r        = this.width;
     this.isKilled = false;
 
     this.replicate();
+
   }
 
   Virus.create = function(game){
@@ -26,9 +27,33 @@ var Virus = (function(){
     game.viruses.push(new Virus(randomX, 2));
   };
 
-  Virus.checkVirus = function(element, index){
-    element.draw(this);
+  Virus.checkVirus = function(virus, index){
+    virus.cX     = virus.x + (virus.width / 2);
+    virus.cY     = virus.y + (virus.height / 2);
+
+    this.fighter.lasers.forEach(function(laser, index){
+      var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY + laser.y, 2),
+          distance = Math.sqrt(sumSq);
+
+      console.log(distance);
+      console.log(this.r);
+
+      if (distance < this.r){
+        console.log('hit!');
+        virus.isKilled = true;
+      }
+      //game.viruses.splice(index, 1);
+    }.bind(virus));
+
+    if(virus.isKilled === true){
+      this.viruses.splice(index, 1);
+      console.log('I am hit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    }else{
+      virus.draw(this);
+    }
   };
+
+
 
   Virus.prototype.draw = function(game){
     if(!this.isKilled){
@@ -45,9 +70,18 @@ var Virus = (function(){
     }
   };
 
+<<<<<<< HEAD
   Virus.prototype.replicate = function(){
     console.log('start timeout');
     window.setTimeout(double.bind(this), 5000);
+=======
+  Virus.prototype.replicate = function(game){
+    console.log('start timeout');
+    window.setTimeout(function(){
+      game.viruses.push(new Virus(this.x, this.y, game));
+      this.replicate(game);
+    }.bind(this), 5000, game);
+>>>>>>> 058e9f43cf2f841d347faa832d889ccd05da3f25
   };
 
   function double(){
