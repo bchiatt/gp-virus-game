@@ -18,8 +18,6 @@ var Game = (function(){
     this.isWon         = false;
     this.isLost        = false;
     this.viruses       = [];
-
-    this.listen();
   }
 
   Game.prototype.listen = function(){
@@ -55,10 +53,10 @@ var Game = (function(){
     count++;
     //this.isWon = this.fighter.killsVirus(this.fighter);
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
-    if(count > 83){
+    /*if(count > 83){
       count = null;
       Virus.create(this);
-    }
+    }*/
 
     this.clear();
     this.viruses.forEach(Virus.checkVirus.bind(this));
@@ -81,6 +79,7 @@ var Game = (function(){
   };
 
   Game.prototype.start = function(){
+    this.listen();
     this.isWon = false;
     this.isLost  = false;
     this.fighter = new Fighter(this);
