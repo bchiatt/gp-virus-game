@@ -2,6 +2,17 @@
 #canvas{
   background-image: url('../assets/img/heart_background.jpg');
   background-size: cover;
+  /*-webkit-filter: blur(5px);*/
+  /*-moz-filter: blur(5px);*/
+  /*-o-filter: blur(5px);*/
+  /*-ms-filter: blur(5px);*/
+  /*filter: blur(5px);*/
+}
+
+body{
+  background-image: url('../assets/img/plx.gif');
+  background-size: cover;
+  /*background-repeat: no-repeat;*/
 }
 
 button{

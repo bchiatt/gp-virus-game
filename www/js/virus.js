@@ -34,11 +34,6 @@ var Virus = (function(){
       var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY - laser.y, 2),
           distance = Math.sqrt(sumSq);
 
-      console.log('virus', this.cX, this.cY);
-      console.log('laser', laser.x + 2, laser.y);
-      console.log('distance', distance);
-      console.log('radius', this.r);
-
       if (distance < this.r){
         console.log('hit!');
         virus.isKilled = true;
@@ -72,11 +67,11 @@ var Virus = (function(){
   };
 
   Virus.prototype.replicate = function(game){
-    console.log('start timeout');
     window.setTimeout(function(){
       game.viruses.push(new Virus(this.x, this.y, game));
       this.replicate(game);
     }.bind(this), 5000, game);
+
   };
 
 

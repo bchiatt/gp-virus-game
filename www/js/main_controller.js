@@ -13,7 +13,9 @@
     document.addEventListener('deviceready', startUp, false);
 
     window.addEventListener('gameover', function(){
-      //cancelTimer();
+      console.log('game over');
+      $scope.startGame = false;
+      $scope.gameOver = true;
     });
     /*
     function startClock(){
@@ -29,8 +31,9 @@
     }
     function cancelTimer(){
       $interval.cancel(timer);
-    }
-    */
+    }*/
+
+
 
     $scope.start = function(){
       game.start();
