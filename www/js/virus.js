@@ -53,7 +53,7 @@ var Virus = (function(){
     window.setTimeout(function(){
       console.log('duplicate', virus);
       game.viruses.push(new Virus(virus.x, virus.y));
-    }, 5000);
+    }, 5000, game);
   };
 
   return Virus;
