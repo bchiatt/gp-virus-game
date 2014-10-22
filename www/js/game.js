@@ -25,8 +25,6 @@ var Game = (function(){
         touch = null;
     window.addEventListener('touchstart', function(data){
       touch++;
-    //  console.log(touch);
-    //  console.log(data);
       var deltaX    = data.touches[0].clientX,
           direction = this.getDirection(deltaX);
 
@@ -38,6 +36,7 @@ var Game = (function(){
         touch = null;
         this.assets.shooter.play();
         if(this.fighter.lasers.length < 4){
+          this.assets.shooter.play();
           Laser.create(this);
         }
       }
@@ -59,12 +58,16 @@ var Game = (function(){
     }
 
     this.clear();
+<<<<<<< HEAD
     this.ctx.font = '20px Sans-Serif';
     console.log(this.ctx.font, 'FOOONNT... font.');
     this.ctx.fillStyle = 'white';
 
     this.viruses.forEach(Virus.checkVirus.bind(this));
+=======
+>>>>>>> b35bcaef2f5a63402b872d74170ec64fbed678f5
     this.fighter.draw(this);
+    this.viruses.forEach(Virus.checkVirus.bind(this));
     this.fighter.lasers.forEach(Laser.checkLaser.bind(this));
     this.ctx.fillText('kill Count:'+ count, 5, 20);
 
@@ -72,10 +75,13 @@ var Game = (function(){
     this.isLost = this.viruses.length > 40;
 
     if(this.isLost){
+      this.assets.gameOver.play();
       window.dispatchEvent(new Event('gameover'));
+      return;
       //this.assets.ray.play();
     }else if(this.isWon){
       window.dispatchEvent(new Event('gameover'));
+      return;
       //navigator.vibrate(3000);
     }else{
       window.requestAnimationFrame(this.loop.bind(this));

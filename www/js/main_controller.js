@@ -9,8 +9,14 @@
     $scope.menu = true;
     $scope.startGame = false;
     $scope.gameOver = false;
+    $scope.kills = 0;
 
     document.addEventListener('deviceready', startUp, false);
+
+    window.addEventListener('dead', function(){
+      $scope.kills++;
+      $scope.$apply();
+    });
 
     window.addEventListener('gameover', function(){
 
@@ -19,7 +25,11 @@
       $scope.menu = true;
       $scope.startGame = false;
       $scope.gameOver = true;
+<<<<<<< HEAD
 
+=======
+      $scope.$apply();
+>>>>>>> b35bcaef2f5a63402b872d74170ec64fbed678f5
     });
     /*
     function startClock(){
@@ -44,6 +54,7 @@
       $scope.startGame = true;
       $scope.menu = false;
       $scope.gameOver = false;
+      game.assets.theme.play();
     };
 
     function startUp(){
