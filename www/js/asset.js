@@ -12,7 +12,7 @@ var Asset = (function(){
 
     asset.fighter = new Image();
 
-    asset.fighter.src = 'assets/img/neutrophil.png';
+    asset.fighter.src = getMediaURL('assets/img/neutrophil.png');
 
     asset.weapon = new Image();
     asset.weapon.src = getMediaURL('assets/img/greenLaserRay.png');
