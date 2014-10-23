@@ -25,14 +25,12 @@ var Fighter = (function(){
   };
 
   Fighter.prototype.update = function(direction, game){
-    var edge = this.checkBoundaries(game);
-    if(!edge){
-      this.x += (direction + 1) * 8;
-      this.cX     = this.x + (this.width / 2);
-    }else{
-      this.x -= (direction + 1) * 9;
-      this.cX     = this.x + (this.width / 2);
+    var delta = (direction + 1) * 8,
+        toFar = this.checkBoundaries(game, delta);
 
+    if(!toFar){
+      this.x += delta;
+      this.cX = this.x + (this.width / 2);
     }
   };
 
@@ -48,8 +46,8 @@ var Fighter = (function(){
       }
   };
 
-  Fighter.prototype.checkBoundaries = function(game){
-    return this.x >= game.canvas.width - this.width || this.x <= 0;
+  Fighter.prototype.checkBoundaries = function(game, delta){
+    return this.x + delta >= game.canvas.width - this.width || this.x + delta <= 0;
   };
 
   return Fighter;
