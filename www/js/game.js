@@ -61,7 +61,10 @@ var Game = (function(){
 
     this.ctx.font = '20px Sans-Serif';
     this.ctx.fillStyle = 'white';
-    this.ctx.fillText('Kill Count: '+ this.kills, 5, 20);
+    this.ctx.fillText('Kill Count: '+ this.kills, 5, 40);
+
+    this.ctx.fillStyle='#FF0000';
+    this.ctx.fillRect(0,0,(this.viruses.length/100)*140,20);
 
     console.log(this.isLost);
 

@@ -57,8 +57,6 @@ var Virus = (function(){
     }
   };
 
-
-
   Virus.prototype.draw = function(game){
     if(!this.isKilled){
       this.checkBoundaries(game);
