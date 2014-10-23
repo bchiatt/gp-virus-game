@@ -15,7 +15,7 @@ var Virus = (function(){
     this.y        = y * 1;
     this.dX       = coordinates[iX];
     this.dY       = coordinates[iY];
-    this.r        = this.width;
+    this.r        = this.width/2;
     this.isKilled = false;
 
     this.replicate(game);
@@ -30,35 +30,32 @@ var Virus = (function(){
     virus.cX     = virus.x + (virus.width / 2);
     virus.cY     = virus.y + (virus.height / 2);
 
-    this.isLost = virus.checkCollision(this);
+    if(virus.checkCollision(this)){this.isLost = true;}
+
+    if(this.isLost === true){console.log('ka-BOOOM!');}
 
     this.fighter.lasers.forEach(function(laser, index){
       var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY - laser.y, 2),
           distance = Math.sqrt(sumSq);
 
       if (distance < this.r * 0.75){
-        console.log('hit!');
         laser.isOut = true;
         this.isKilled = true;
       }
 
-      console.log(laser);
       //game.viruses.splice(index, 1);
     }.bind(virus));
 
     if(virus.isKilled === true){
       this.assets.killed.play();
-      window.dispatchEvent(new Event('dead'));
-      console.log('dead virus', virus);
+      this.kills++;
+      //window.dispatchEvent(new Event('dead'));
       clearTimeout(virus.timer);
       this.viruses.splice(index, 1);
-      console.log('I am hit!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     }else{
       virus.draw(this);
     }
   };
-
-
 
   Virus.prototype.draw = function(game){
     if(!this.isKilled){
@@ -76,17 +73,23 @@ var Virus = (function(){
   };
 
   Virus.prototype.checkCollision = function(game){
-    var sumSq    = Math.pow(this.cX - (game.fighter.x + 2), 2) + Math.pow(this.cY - game.fighter.y, 2),
+    game.fighter.cX = game.fighter.x + (game.fighter.width / 2);
+    game.fighter.cY = game.fighter.y + (game.fighter.height / 2);
+
+    var sumSq    = Math.pow(this.cX - (game.fighter.cX), 2) + Math.pow(this.cY - game.fighter.cY, 2),
         distance = Math.sqrt(sumSq);
 
-    return distance < this.r * 0.75;
+    return distance < this.r + game.fighter.r - 1;
   };
 
   Virus.prototype.replicate = function(game){
+    var rates = [6500, 6000, 5500, 5000, 2000],
+        i     = Math.floor(Math.random() * rates.length);
+
     this.timer = setTimeout(function(){
       game.viruses.push(new Virus(this.x, this.y, game));
       this.replicate(game);
-    }.bind(this), 5000, game);
+    }.bind(this), rates[i], game);
   };
 
   /*function double(){

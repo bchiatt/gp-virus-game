@@ -21,21 +21,11 @@
     <div ng-show="menu" class="greeting">
       <div class="row">
         <div class="col">
-          <ion-header-bar style="margin-bottom: 20px;" class="bar-assertive">
-            <h1 class="title">Flu Shot</h1>
-          </ion-header-bar>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
           <button ng-click="start()" style="margin-top: 50px;" class="button button-block button-balanced">Play!</button>
         </div>
       </div>
     </div>
     <ion-pane ng-show="startGame">
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Flu Shot</h1>
-      </ion-header-bar>
       <ion-content>
         <canvas id="canvas"></canvas>
       </ion-content>
@@ -43,8 +33,16 @@
     <div ng-show="gameOver" class="row">
       <div class="row">
         <div class="col">
-          <h1>Game Over!</h1>
-          <button ng-click="start()">Play Again!</button>
+          <div class="results">
+            <h1>Game Over!</h1>
+            <h2>{{result}}</h2>
+            <h2>...you killed:</h2>
+            <h1>{{kills}}</h1>
+            <h2>viruses!</h2><br>
+            <h3>Now go get your flu shot!</h3>
+            <h3>And wash your hands!</h3>
+          </div>
+          <button ng-click="start()" style="margin-top: 50px;" class="button button-block button-balanced">Play Again!</button>
         </div>
       </div>
     </div>

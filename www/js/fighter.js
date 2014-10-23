@@ -3,15 +3,15 @@
 
 var Fighter = (function(){
   'use strict';
-  var fighterHeight = 20,
-      fighterWidth = 60;
+  var fighterHeight = 50,
+      fighterWidth = 50;
 
   function Fighter(game){
     this.width = fighterWidth;
     this.height = fighterHeight;
     this.r = this.width/2;
     this.x = (game.canvas.width/2 - this.r);
-    this.y = game.canvas.height - this.height;
+    this.y = game.canvas.height - this.height - 7;
     this.cX     = this.x + (this.width / 2);
     this.cY     = this.y + (this.height / 2);
     this.lasers = [];
@@ -25,14 +25,12 @@ var Fighter = (function(){
   };
 
   Fighter.prototype.update = function(direction, game){
-    var edge = this.checkBoundaries(game);
-    if(!edge){
-      this.x += (direction + 1) * 6;
-      this.cX     = this.x + (this.width / 2);
-    }else{
-      this.x -= (direction + 1) * 7;
-      this.cX     = this.x + (this.width / 2);
+    var delta = (direction + 1) * 8,
+        toFar = this.checkBoundaries(game, delta);
 
+    if(!toFar){
+      this.x += delta;
+      this.cX = this.x + (this.width / 2);
     }
   };
 
@@ -48,10 +46,8 @@ var Fighter = (function(){
       }
   };
 
-  Fighter.prototype.checkBoundaries = function(game){
-    if(this.x >= game.canvas.width - this.width || this.x <= 0){
-      this.x = this.x;
-    }
+  Fighter.prototype.checkBoundaries = function(game, delta){
+    return this.x + delta >= game.canvas.width - this.width || this.x + delta <= 0;
   };
 
   return Fighter;
