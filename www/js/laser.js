@@ -23,7 +23,7 @@ var Laser = (function(){
   };
 
   Laser.prototype.draw = function(game){
-    game.ctx.drawImage(game.assets.weapon, this.x, (this.y -= 17), this.width, this.height);
+    game.ctx.drawImage(game.assets.weapon, this.x, (this.y -= 20), this.width, this.height);
   };
 
   Laser.create = function(game){
