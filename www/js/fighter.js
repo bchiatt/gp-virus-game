@@ -11,7 +11,7 @@ var Fighter = (function(){
     this.height = fighterHeight;
     this.r = this.width/2;
     this.x = (game.canvas.width/2 - this.r);
-    this.y = game.canvas.height - this.height;
+    this.y = game.canvas.height - this.height - 7;
     this.cX     = this.x + (this.width / 2);
     this.cY     = this.y + (this.height / 2);
     this.lasers = [];
@@ -27,10 +27,10 @@ var Fighter = (function(){
   Fighter.prototype.update = function(direction, game){
     var edge = this.checkBoundaries(game);
     if(!edge){
-      this.x += (direction + 1) * 6;
+      this.x += (direction + 1) * 8;
       this.cX     = this.x + (this.width / 2);
     }else{
-      this.x -= (direction + 1) * 7;
+      this.x -= (direction + 1) * 9;
       this.cX     = this.x + (this.width / 2);
 
     }
@@ -49,9 +49,7 @@ var Fighter = (function(){
   };
 
   Fighter.prototype.checkBoundaries = function(game){
-    if(this.x >= game.canvas.width - this.width || this.x <= 0){
-      this.x = this.x;
-    }
+    return this.x >= game.canvas.width - this.width || this.x <= 0;
   };
 
   return Fighter;

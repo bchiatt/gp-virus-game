@@ -46,8 +46,8 @@
     };
 
     function startUp(){
-      screen.lockOrientation('portrait');
       game = new Game();
+      screen.lockOrientation('portrait');
       game.assets.theme.play();
       console.log(game);
     }

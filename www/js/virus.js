@@ -32,6 +32,8 @@ var Virus = (function(){
 
     this.isLost = virus.checkCollision(this);
 
+    if(this.isLost === true){console.log('ka-BOOOM!');}
+
     this.fighter.lasers.forEach(function(laser, index){
       var sumSq    = Math.pow(this.cX - (laser.x + 2), 2) + Math.pow(this.cY - laser.y, 2),
           distance = Math.sqrt(sumSq);
@@ -73,10 +75,13 @@ var Virus = (function(){
   };
 
   Virus.prototype.checkCollision = function(game){
-    var sumSq    = Math.pow(this.cX - (game.fighter.x + 2), 2) + Math.pow(this.cY - game.fighter.y, 2),
+    game.fighter.cX = game.fighter.x + (game.fighter.width / 2);
+    game.fighter.cY = game.fighter.y + (game.fighter.height / 2);
+
+    var sumSq    = Math.pow(this.cX - (game.fighter.cX), 2) + Math.pow(this.cY - game.fighter.cY, 2),
         distance = Math.sqrt(sumSq);
 
-    return distance < this.r * 0.75;
+    return distance < this.r + game.fighter.r - 5;
   };
 
   Virus.prototype.replicate = function(game){

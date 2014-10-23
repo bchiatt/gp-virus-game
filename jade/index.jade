@@ -20,13 +20,13 @@ html
     .greeting(ng-show='menu')
       .row
         .col
-          ion-header-bar.bar-assertive(style='margin-bottom: 20px;')
-            h1.title Virus Game
-      .row
-        .col
           button.button.button-block.button-balanced(ng-click='start()', style='margin-top: 50px;') Play!
 
     ion-pane(ng-show='startGame')
+      //.row
+        .col
+          ion-header-bar.bar-assertive(style='margin-bottom: 20px;')
+            h1.title Virus Game
       ion-content
         canvas#canvas
 

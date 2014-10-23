@@ -63,8 +63,7 @@ var Game = (function(){
     this.ctx.fillStyle = 'white';
     this.ctx.fillText('Kill Count: '+ this.kills, 5, 20);
 
-    this.isLost = this.viruses.length > 40;
-    this.isWon = this.viruses.length === 0;
+    console.log(this.isLost);
 
     if(this.isLost){
       this.assets.gameOver.play();
@@ -76,6 +75,8 @@ var Game = (function(){
       return;
       //navigator.vibrate(3000);
     }else{
+      this.isLost = this.viruses.length > 40;
+      this.isWon = this.viruses.length === 0;
       window.requestAnimationFrame(this.loop.bind(this));
     }
   };
@@ -89,7 +90,9 @@ var Game = (function(){
     this.isWon = false;
     this.isLost  = false;
     this.fighter = new Fighter(this);
-    Virus.create(this);
+    for(var x = 0; x < 5; x++){
+      Virus.create(this);
+    }
     this.loop();
   };
 

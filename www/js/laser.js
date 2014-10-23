@@ -5,8 +5,7 @@ var Laser = (function(){
 
 
   function Laser(fighter){
-    console.log(fighter, 'Fighter!!!!');
-    this.height = 10;
+    this.height = 15;
     this.width  = 4;
     this.x      = (fighter.cX - this.width / 2) *1;
     this.y      = (fighter.cY - 10) * 1;
@@ -16,7 +15,6 @@ var Laser = (function(){
 
   Laser.checkLaser = function(laser, index){
     laser.isOut = laser.didVanish();
-    console.log(laser.isOut);
     if (laser.isOut === true){
       this.fighter.lasers.splice(index, 1);
     }else{
