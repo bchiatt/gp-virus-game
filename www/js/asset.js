@@ -11,7 +11,7 @@ var Asset = (function(){
     var asset = {};
 
     asset.fighter = new Image();
-    asset.fighter.src = getMediaURL('assets/img/fighter.png');
+    asset.fighter.src = getMediaURL('assets/img/neutrophil.png');
     asset.weapon = new Image();
     asset.weapon.src = getMediaURL('assets/img/greenLaserRay.png');
     asset.virus = new Image();

@@ -7,14 +7,12 @@ var Game = (function(){
   var count = null;
 
   function Game(){
-    var bodyHeight   = window.innerHeight,
-        headerHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
-
     this.canvas        = document.getElementById('canvas');
     this.ctx           = this.canvas.getContext('2d');
-    this.canvas.height = bodyHeight - headerHeight;
+    this.canvas.height = window.innerHeight;
     this.canvas.width  = window.innerWidth;
     this.assets        = Asset.load();
+    this.kills         = 0;
     this.isWon         = false;
     this.isLost        = false;
     this.viruses       = [];
@@ -34,7 +32,6 @@ var Game = (function(){
         }.bind(this), 60);
       }else{
         touch = null;
-        this.assets.shooter.play();
         if(this.fighter.lasers.length < 4){
           this.assets.shooter.play();
           Laser.create(this);
@@ -52,27 +49,25 @@ var Game = (function(){
     count++;
     //this.isWon = this.fighter.killsVirus(this.fighter);
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
-    if(count > 83){
+    /*if(count > 83){
       count = null;
       Virus.create(this);
-    }
+    }*/
 
     this.clear();
-<<<<<<< HEAD
-    this.ctx.font = '20px Sans-Serif';
-    console.log(this.ctx.font, 'FOOONNT... font.');
-    this.ctx.fillStyle = 'white';
-
-    this.viruses.forEach(Virus.checkVirus.bind(this));
-=======
->>>>>>> b35bcaef2f5a63402b872d74170ec64fbed678f5
     this.fighter.draw(this);
     this.viruses.forEach(Virus.checkVirus.bind(this));
     this.fighter.lasers.forEach(Laser.checkLaser.bind(this));
-    this.ctx.fillText('kill Count:'+ count, 5, 20);
 
+    this.ctx.font = '20px Sans-Serif';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText('Kill Count: '+ this.kills, 5, 40);
+
+    this.ctx.fillStyle='#FF0000';
+    this.ctx.fillRect(0,0,(this.viruses.length/100)*140,20);
 
     this.isLost = this.viruses.length > 40;
+    this.isWon = this.viruses.length === 0;
 
     if(this.isLost){
       this.assets.gameOver.play();

@@ -9,27 +9,15 @@
     $scope.menu = true;
     $scope.startGame = false;
     $scope.gameOver = false;
-    $scope.kills = 0;
 
     document.addEventListener('deviceready', startUp, false);
 
-    window.addEventListener('dead', function(){
-      $scope.kills++;
-      $scope.$apply();
-    });
-
     window.addEventListener('gameover', function(){
-
       console.log('game over');
-      game = null;
-      $scope.menu = true;
       $scope.startGame = false;
       $scope.gameOver = true;
-<<<<<<< HEAD
-
-=======
       $scope.$apply();
->>>>>>> b35bcaef2f5a63402b872d74170ec64fbed678f5
+      game = new Game();
     });
     /*
     function startClock(){
