@@ -26,11 +26,6 @@
       </div>
     </div>
     <ion-pane ng-show="startGame">
-      <!--.row
-      .col
-        ion-header-bar.bar-assertive(style='margin-bottom: 20px;')
-          h1.title Virus Game
-      -->
       <ion-content>
         <canvas id="canvas"></canvas>
       </ion-content>
@@ -39,7 +34,7 @@
       <div class="row">
         <div class="col">
           <h1>Game Over!</h1>
-          <button ng-click="start()">Play Again!</button>
+          <button ng-click="start()" style="margin-top: 50px;" class="button button-block button-balanced">Play Again!</button>
         </div>
       </div>
     </div>
