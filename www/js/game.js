@@ -4,7 +4,10 @@
 
 var Game = (function(){
   'use strict';
-  var count = null;
+  var count = null,
+      loopId,
+      results,
+      evt;
 
   function Game(){
     this.canvas        = document.getElementById('canvas');
@@ -47,6 +50,7 @@ var Game = (function(){
 
   Game.prototype.loop = function(timestamp){
     count++;
+    console.log(count);
     //this.isWon = this.fighter.killsVirus(this.fighter);
     //this.isLost = this.virus.criticalMass(this) || this.viurs.hitsFighter(this);
     /*if(count > 83){
@@ -67,21 +71,30 @@ var Game = (function(){
     this.ctx.fillRect(0,0,(this.viruses.length * (this.canvas.width / 40)),20);
 
     if(this.viruses.length > 40){this.isLost = true;}
+    if(this.viruses.length === 0){this.isWon = true;}
 
     if(this.isLost){
+      this.stop();
+      evt = new Event('gameover');
+      evt.results = {
+        type: 'lost',
+        kills: this.kills
+      };
+      //evt.initCustomEvent('gameover, true, true', results);
+      window.dispatchEvent(evt);
       this.assets.gameOver.play();
-      this.assets.theme.stop();
-      window.dispatchEvent(new Event('gameover'));
-      return;
-      //this.assets.ray.play();
+      navigator.vibrate(500, 500, 500);
     }else if(this.isWon){
-      window.dispatchEvent(new Event('gameover'));
-      return;
-      //navigator.vibrate(3000);
+      this.stop();
+      evt = document.createEvent('CustomEvent');
+      results = {
+        type: 'won',
+        kills: this.kills
+      };
+      evt.initCustomEvent('gameover, true, true', results);
+      window.dispatchEvent(evt);
     }else{
-      this.isLost = this.viruses.length > 40;
-      this.isWon = this.viruses.length === 0;
-      window.requestAnimationFrame(this.loop.bind(this));
+      loopId = window.requestAnimationFrame(this.loop.bind(this));
     }
   };
 
@@ -106,6 +119,13 @@ var Game = (function(){
       }else{
         return '-';
       }
+  };
+
+  Game.prototype.stop = function(){
+    window.cancelAnimationFrame(loopId);
+    this.assets.theme.stop();
+    loopId = null;
+    count = null;
   };
 
   return Game;

@@ -79,7 +79,7 @@ var Virus = (function(){
     var sumSq    = Math.pow(this.cX - (game.fighter.cX), 2) + Math.pow(this.cY - game.fighter.cY, 2),
         distance = Math.sqrt(sumSq);
 
-    return distance < this.r + game.fighter.r;
+    return distance < this.r + game.fighter.r - 1;
   };
 
   Virus.prototype.replicate = function(game){

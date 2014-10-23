@@ -29,5 +29,13 @@ html
     .row(ng-show='gameOver')
       .row
         .col
-          h1 Game Over!
+          .results
+            h1 Game Over!
+            h2 {{result}}
+            h2 ...you killed:
+            h1 {{kills}}
+            h2 viruses!
+            br
+            h3 Now go get your flu shot!
+            h3 And wash your hands!
           button.button.button-block.button-balanced(ng-click='start()', style='margin-top: 50px;') Play Again!

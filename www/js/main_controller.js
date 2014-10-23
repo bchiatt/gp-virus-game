@@ -12,8 +12,15 @@
 
     document.addEventListener('deviceready', startUp, false);
 
-    window.addEventListener('gameover', function(){
+    window.addEventListener('gameover', function(evt){
       console.log('game over');
+      console.log(evt);
+      $scope.kills = evt.results.kills;
+      if(evt.results.type === 'won'){
+        $scope.result = 'You are safe from the virus invasion! And...';
+      }else{
+        $scope.result = 'Sad. The virus overwhelmed your body! But...';
+      }
       $scope.startGame = false;
       $scope.gameOver = true;
       $scope.$apply();
