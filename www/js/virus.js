@@ -83,10 +83,13 @@ var Virus = (function(){
   };
 
   Virus.prototype.replicate = function(game){
+    var rates = [6000, 5500, 5000, 4500, 2000],
+        i     = Math.floor(Math.random() * rates.length);
+
     this.timer = setTimeout(function(){
       game.viruses.push(new Virus(this.x, this.y, game));
       this.replicate(game);
-    }.bind(this), 5000, game);
+    }.bind(this), rates[i], game);
   };
 
   /*function double(){
