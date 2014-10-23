@@ -70,6 +70,7 @@ var Game = (function(){
 
     if(this.isLost){
       this.assets.gameOver.play();
+      this.assets.theme.stop();
       window.dispatchEvent(new Event('gameover'));
       return;
       //this.assets.ray.play();
@@ -93,7 +94,7 @@ var Game = (function(){
     this.isWon = false;
     this.isLost  = false;
     this.fighter = new Fighter(this);
-    for(var x = 0; x < 5; x++){
+    for(var x = 0; x < 4; x++){
       Virus.create(this);
     }
     this.loop();

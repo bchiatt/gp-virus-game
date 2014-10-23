@@ -15,7 +15,7 @@ var Virus = (function(){
     this.y        = y * 1;
     this.dX       = coordinates[iX];
     this.dY       = coordinates[iY];
-    this.r        = this.width;
+    this.r        = this.width/2;
     this.isKilled = false;
 
     this.replicate(game);
@@ -30,7 +30,7 @@ var Virus = (function(){
     virus.cX     = virus.x + (virus.width / 2);
     virus.cY     = virus.y + (virus.height / 2);
 
-    this.isLost = virus.checkCollision(this);
+    if(virus.checkCollision(this)){this.isLost = true;}
 
     if(this.isLost === true){console.log('ka-BOOOM!');}
 
@@ -79,11 +79,11 @@ var Virus = (function(){
     var sumSq    = Math.pow(this.cX - (game.fighter.cX), 2) + Math.pow(this.cY - game.fighter.cY, 2),
         distance = Math.sqrt(sumSq);
 
-    return distance < this.r + game.fighter.r - 5;
+    return distance < this.r + game.fighter.r;
   };
 
   Virus.prototype.replicate = function(game){
-    var rates = [6000, 5500, 5000, 4500, 2000],
+    var rates = [6500, 6000, 5500, 5000, 2000],
         i     = Math.floor(Math.random() * rates.length);
 
     this.timer = setTimeout(function(){
